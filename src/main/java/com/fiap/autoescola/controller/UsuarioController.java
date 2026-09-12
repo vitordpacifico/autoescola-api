@@ -25,17 +25,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Gestao de usuarios. Cadastrar/listar/atualizar/excluir sao restritos a
- * ADMIN (regra aplicada no SecurityConfig); /me/senha e liberado a qualquer
- * usuario autenticado, que so pode alterar a propria senha.
- */
 @RestController
 @RequestMapping("/api/v1/usuarios")
 @RequiredArgsConstructor
 @Tag(name = "Usuários", description = "Cadastro e gestão de usuários da API (apenas ADMIN, exceto troca da própria senha)")
 public class UsuarioController {
-
     private final UsuarioService usuarioService;
 
     @PostMapping
@@ -63,7 +57,6 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
-    /** Qualquer usuário autenticado pode alterar a própria senha (nunca a de terceiros). */
     @PutMapping("/me/senha")
     public ResponseEntity<Void> alterarPropriaSenha(Authentication authentication,
                                                      @Valid @RequestBody AlterarSenhaRequest request) {

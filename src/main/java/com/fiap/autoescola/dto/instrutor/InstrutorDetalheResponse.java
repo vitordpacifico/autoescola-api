@@ -4,7 +4,6 @@ import com.fiap.autoescola.dto.common.EnderecoDto;
 import com.fiap.autoescola.model.Especialidade;
 import com.fiap.autoescola.model.Instrutor;
 
-/** Retornado na criação e na atualização - visão completa de um instrutor. */
 public record InstrutorDetalheResponse(
         Long id, String nome, String email, String telefone, String cnh,
         Especialidade especialidade, EnderecoDto endereco, boolean ativo

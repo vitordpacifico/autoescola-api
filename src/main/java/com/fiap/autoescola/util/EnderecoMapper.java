@@ -4,7 +4,6 @@ import com.fiap.autoescola.dto.common.EnderecoDto;
 import com.fiap.autoescola.model.Endereco;
 
 public final class EnderecoMapper {
-
     private EnderecoMapper() {
     }
 

@@ -13,11 +13,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-/** Resposta padronizada para requisicoes nao autenticadas (401). */
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
-
     private final ObjectMapper objectMapper;
 
     @Override

@@ -12,10 +12,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 
-/** Geracao e validacao de tokens JWT (HS256) usados para autenticar as requisicoes. */
 @Component
 public class JwtService {
-
     private final SecretKey secretKey;
     private final long expirationMs;
 
@@ -58,7 +56,6 @@ public class JwtService {
         return List.of("ROLE_" + perfil);
     }
 
-    /** Retorna true se o token e valido (assinatura ok e nao expirado). */
     public boolean isValido(String token) {
         try {
             parseClaims(token);

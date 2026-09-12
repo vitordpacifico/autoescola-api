@@ -27,7 +27,6 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class Instrutor {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,7 +40,6 @@ public class Instrutor {
     @Column(nullable = false, length = 20)
     private String telefone;
 
-    /** Numero de registro da CNH. Imutavel apos o cadastro (regra de negocio). */
     @Column(nullable = false, unique = true, length = 20)
     private String cnh;
 
@@ -61,7 +59,6 @@ public class Instrutor {
     })
     private Endereco endereco;
 
-    /** Exclusao logica: instrutor "excluido" fica inativo, nunca e removido do banco. */
     @Column(nullable = false)
     @Builder.Default
     private boolean ativo = true;

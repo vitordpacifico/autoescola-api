@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-/** Numero e complemento sao os unicos campos opcionais (regra do enunciado). */
 public record EnderecoDto(
         @NotBlank(message = "Logradouro é obrigatório") @Size(max = 150) String logradouro,
         @Size(max = 20) String numero,

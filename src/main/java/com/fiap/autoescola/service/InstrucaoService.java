@@ -25,15 +25,10 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * Agendamento e cancelamento de instrucoes - regras de negocio descritas no
- * documento "CRUD - Auto-Escola" anexo ao enunciado do CP4.
- */
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class InstrucaoService {
-
     private final InstrucaoRepository instrucaoRepository;
     private final InstrutorRepository instrutorRepository;
     private final AlunoService alunoService;
@@ -100,10 +95,6 @@ public class InstrucaoService {
         return InstrucaoResponse.from(instrucao);
     }
 
-    // -------------------------------------------------------------------
-    // Regras de negocio
-    // -------------------------------------------------------------------
-
     private void validarHorarioDeFuncionamento(LocalDateTime dataHora) {
         DayOfWeek dia = dataHora.getDayOfWeek();
         if (dia == DayOfWeek.SUNDAY) {
@@ -156,7 +147,6 @@ public class InstrucaoService {
             return instrutor;
         }
 
-        // Instrutor nao informado: escolha aleatoria entre os disponiveis no horario.
         List<Instrutor> disponiveis = instrutorRepository.findDisponiveisEm(dataHora);
         if (disponiveis.isEmpty()) {
             throw new BusinessRuleException("Nenhum instrutor disponível neste horário.");

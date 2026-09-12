@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface InstrutorRepository extends JpaRepository<Instrutor, Long> {
-
     Page<Instrutor> findAllByOrderByNomeAsc(Pageable pageable);
 
     boolean existsByEmail(String email);
@@ -21,11 +20,6 @@ public interface InstrutorRepository extends JpaRepository<Instrutor, Long> {
 
     List<Instrutor> findAllByAtivoTrue();
 
-    /**
-     * Instrutores ativos que NAO possuem nenhuma instrucao (nao cancelada) no
-     * horario informado - usados para a escolha aleatoria de instrutor quando
-     * o aluno nao especifica um.
-     */
     @org.springframework.data.jpa.repository.Query("""
             SELECT i FROM Instrutor i
             WHERE i.ativo = true

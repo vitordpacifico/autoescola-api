@@ -17,16 +17,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Gestao de usuarios da API. Cadastrar, listar, atualizar perfil e excluir
- * sao operacoes restritas a ADMIN (aplicado no SecurityConfig); a troca da
- * propria senha e liberada para qualquer usuario autenticado.
- */
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class UsuarioService {
-
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
 

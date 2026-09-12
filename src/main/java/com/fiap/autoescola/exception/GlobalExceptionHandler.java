@@ -17,14 +17,9 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.List;
 
-/**
- * Tratamento centralizado de erros. Nunca expoe stack trace, nome de classe
- * interna ou estrutura de banco ao cliente - o detalhe completo vai so pro log.
- */
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
-
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiErrorResponse> handleNotFound(ResourceNotFoundException ex, HttpServletRequest req) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)

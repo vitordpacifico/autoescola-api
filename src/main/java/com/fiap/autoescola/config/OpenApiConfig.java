@@ -8,10 +8,8 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/** Registra o esquema "Bearer" no Swagger UI, permitindo testar os endpoints autenticados com o token JWT. */
 @Configuration
 public class OpenApiConfig {
-
     private static final String BEARER_SCHEME = "bearerAuth";
 
     @Bean

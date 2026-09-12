@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Slf4j
 public class InstrutorService {
-
     private final InstrutorRepository instrutorRepository;
 
     @Transactional
@@ -47,7 +46,6 @@ public class InstrutorService {
         return InstrutorDetalheResponse.from(salvo);
     }
 
-    /** Listagem paginada (10/página por padrão), ordenada por nome crescente. */
     @Transactional(readOnly = true)
     public Page<InstrutorResponse> listar(Pageable pageable) {
         return instrutorRepository.findAllByOrderByNomeAsc(pageable).map(InstrutorResponse::from);
@@ -58,7 +56,6 @@ public class InstrutorService {
         return InstrutorDetalheResponse.from(buscarEntidade(id));
     }
 
-    /** Apenas nome, telefone e endereço são atualizáveis (e-mail/CNH/especialidade são imutáveis). */
     @Transactional
     public InstrutorDetalheResponse atualizar(Long id, AtualizarInstrutorRequest request) {
         Instrutor instrutor = buscarEntidade(id);
@@ -71,7 +68,6 @@ public class InstrutorService {
         return InstrutorDetalheResponse.from(salvo);
     }
 
-    /** Exclusão lógica: o instrutor é marcado como inativo, nunca removido do banco. */
     @Transactional
     public void excluir(Long id) {
         Instrutor instrutor = buscarEntidade(id);

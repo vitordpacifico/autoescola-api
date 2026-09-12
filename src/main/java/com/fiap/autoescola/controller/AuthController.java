@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Tag(name = "Autenticação", description = "Login e emissão de token JWT")
 public class AuthController {
-
     private final AuthService authService;
 
     @PostMapping("/login")

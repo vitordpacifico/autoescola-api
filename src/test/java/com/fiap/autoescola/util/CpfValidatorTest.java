@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CpfValidatorTest {
-
     @ParameterizedTest
     @ValueSource(strings = {"52998224725", "111.444.777-35", "39053344705"})
     void deveAceitarCpfValido(String cpf) {

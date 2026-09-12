@@ -25,7 +25,6 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class Aluno {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,7 +38,6 @@ public class Aluno {
     @Column(nullable = false, length = 20)
     private String telefone;
 
-    /** Imutavel apos o cadastro (regra de negocio). */
     @Column(nullable = false, unique = true, length = 14)
     private String cpf;
 
@@ -55,7 +53,6 @@ public class Aluno {
     })
     private Endereco endereco;
 
-    /** Exclusao logica: aluno "excluido" fica inativo, nunca e removido do banco. */
     @Column(nullable = false)
     @Builder.Default
     private boolean ativo = true;

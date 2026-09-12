@@ -45,8 +45,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Banco: H2 em memoria por padrao (profile default/dev) para rodar sem
-             infra externa; PostgreSQL disponivel via profile "postgres". -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -58,7 +56,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- JWT -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -77,7 +74,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Documentacao da API -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>

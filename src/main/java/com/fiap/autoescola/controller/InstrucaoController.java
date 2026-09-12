@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Tag(name = "Instruções", description = "Agendamento e cancelamento de instruções")
 public class InstrucaoController {
-
     private final InstrucaoService instrucaoService;
 
     @PostMapping

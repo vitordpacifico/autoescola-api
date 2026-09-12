@@ -25,16 +25,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/**
- * Cobre: login/JWT, RBAC (endpoints de usuários só para ADMIN) e troca da
- * própria senha por um usuário comum - o cerne da Atividade do CP4.
- */
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Transactional
 class AuthAndRbacIntegrationTest {
-
     @Autowired
     private MockMvc mockMvc;
     @Autowired

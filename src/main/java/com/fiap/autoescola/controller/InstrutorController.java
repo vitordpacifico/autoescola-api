@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Tag(name = "Instrutores", description = "CRUD de instrutores (exclusão é lógica)")
 public class InstrutorController {
-
     private static final int TAMANHO_PAGINA_PADRAO = 10;
 
     private final InstrutorService instrutorService;
@@ -39,7 +38,6 @@ public class InstrutorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(instrutorService.cadastrar(request));
     }
 
-    /** Paginado (10/página por padrão) e ordenado por nome, conforme o enunciado. */
     @GetMapping
     public ResponseEntity<Page<InstrutorResponse>> listar(
             @RequestParam(defaultValue = "0") int pagina,

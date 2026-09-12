@@ -10,17 +10,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * Endereco completo, embutido em Instrutor e Aluno.
- * Numero e complemento sao os unicos campos opcionais (regra do enunciado).
- */
 @Embeddable
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Endereco {
-
     @NotBlank(message = "Logradouro é obrigatório")
     @Size(max = 150)
     @Column(nullable = false, length = 150)

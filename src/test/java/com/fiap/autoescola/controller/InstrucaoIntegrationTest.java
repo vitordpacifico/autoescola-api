@@ -38,7 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @Transactional
 class InstrucaoIntegrationTest {
-
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -130,7 +129,6 @@ class InstrucaoIntegrationTest {
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated());
 
-        // Segundo aluno tentando o mesmo instrutor no mesmo horario.
         Endereco endereco = new Endereco("Rua B", "2", null, "Centro", "São Paulo", "SP", "01000-000");
         Aluno outroAluno = alunoRepository.save(com.fiap.autoescola.model.Aluno.builder()
                 .nome("Outro Aluno").email("outro@escola.com").telefone("11977777777")
@@ -148,7 +146,6 @@ class InstrucaoIntegrationTest {
     void naoPermiteTerceiraInstrucaoDoMesmoAlunoNoMesmoDia() throws Exception {
         LocalDateTime dataHora = proximoHorarioValido(3);
 
-        // Precisamos de outro instrutor para nao esbarrar no conflito de horario do instrutor.
         Endereco endereco = new Endereco("Rua C", "3", null, "Centro", "São Paulo", "SP", "01000-000");
         var segundoInstrutor = instrutorRepository.save(com.fiap.autoescola.model.Instrutor.builder()
                 .nome("Segundo Instrutor").email("segundo@escola.com").telefone("11966666666")
@@ -167,8 +164,6 @@ class InstrucaoIntegrationTest {
 
     @Test
     void naoPermiteCancelarComMenosDe24HorasDeAntecedencia() throws Exception {
-        // Insere a instrucao diretamente (o teste valida apenas a regra de
-        // cancelamento, nao as regras de agendamento).
         var aluno = alunoRepository.findById(alunoId).orElseThrow();
         var instrutor = instrutorRepository.findById(instrutorId).orElseThrow();
         var instrucao = com.fiap.autoescola.model.Instrucao.builder()

@@ -16,11 +16,6 @@ import lombok.Setter;
 
 import java.time.Instant;
 
-/**
- * Usuario da API (autenticacao/autorizacao). Distinto de Aluno/Instrutor:
- * representa quem opera o sistema (ex.: recepcionista, administrador),
- * conforme exigido pelo enunciado do CP4.
- */
 @Entity
 @Table(name = "usuarios")
 @Getter
@@ -29,7 +24,6 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class Usuario {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,7 +31,6 @@ public class Usuario {
     @Column(nullable = false, unique = true, length = 60)
     private String username;
 
-    /** Hash BCrypt - nunca a senha em texto puro. */
     @Column(name = "senha_hash", nullable = false)
     private String senhaHash;
 

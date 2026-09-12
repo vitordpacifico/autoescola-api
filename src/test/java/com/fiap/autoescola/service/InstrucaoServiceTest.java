@@ -40,7 +40,6 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class InstrucaoServiceTest {
-
     @Mock
     private InstrucaoRepository instrucaoRepository;
     @Mock
@@ -72,7 +71,6 @@ class InstrucaoServiceTest {
         lenient().when(instrutorService.buscarEntidade(10L)).thenReturn(instrutorAtivo);
     }
 
-    /** Proxima data, pelo menos {@code diasMinimos} a frente, garantida em dia util (seg-sab), 10h. */
     private LocalDateTime proximoHorarioValido(int diasMinimos) {
         LocalDate data = LocalDate.now().plusDays(diasMinimos);
         while (data.getDayOfWeek() == DayOfWeek.SUNDAY) {
@@ -106,7 +104,7 @@ class InstrucaoServiceTest {
         while (proximoDomingo.getDayOfWeek() != DayOfWeek.SUNDAY) {
             proximoDomingo = proximoDomingo.plusDays(1);
         }
-        LocalDateTime dataHora = proximoDomingo.plusDays(7).atTime(10, 0); // domingo, bem no futuro
+        LocalDateTime dataHora = proximoDomingo.plusDays(7).atTime(10, 0);
 
         assertThatThrownBy(() -> instrucaoService.agendar(new AgendarInstrucaoRequest(1L, 10L, dataHora)))
                 .isInstanceOf(BusinessRuleException.class)
@@ -124,7 +122,6 @@ class InstrucaoServiceTest {
 
     @Test
     void agendar_falha_foraDoHorarioFuncionamento_naoCabeAntesDoFechamento() {
-        // Fechamento 21:00, duracao 60min -> ultimo inicio permitido e 20:00.
         LocalDateTime dataHora = proximoHorarioValido(2).toLocalDate().atTime(20, 30);
 
         assertThatThrownBy(() -> instrucaoService.agendar(new AgendarInstrucaoRequest(1L, 10L, dataHora)))
@@ -134,8 +131,6 @@ class InstrucaoServiceTest {
 
     @Test
     void agendar_falha_antecedenciaMinima() {
-        // "Agora" fixado numa quarta-feira as 10h (dentro do horario de funcionamento),
-        // para isolar a regra de antecedencia minima da regra de horario de funcionamento.
         LocalDate proximaQuarta = LocalDate.now();
         while (proximaQuarta.getDayOfWeek() != DayOfWeek.WEDNESDAY) {
             proximaQuarta = proximaQuarta.plusDays(1);
@@ -146,7 +141,7 @@ class InstrucaoServiceTest {
         InstrucaoService service = new InstrucaoService(instrucaoRepository, instrutorRepository, alunoService,
                 instrutorService, properties, clockFixo);
 
-        LocalDateTime dataHora = proximaQuarta.atTime(10, 5); // so 5 min a frente do "agora" fixo (minimo exigido: 30 min)
+        LocalDateTime dataHora = proximaQuarta.atTime(10, 5);
 
         assertThatThrownBy(() -> service.agendar(new AgendarInstrucaoRequest(1L, 10L, dataHora)))
                 .isInstanceOf(BusinessRuleException.class)

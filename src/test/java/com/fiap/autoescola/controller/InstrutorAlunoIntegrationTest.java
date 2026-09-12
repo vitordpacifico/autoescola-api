@@ -36,7 +36,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @Transactional
 class InstrutorAlunoIntegrationTest {
-
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -100,7 +99,6 @@ class InstrutorAlunoIntegrationTest {
     void atualizarInstrutor_naoAceitaAlterarEmailCnhOuEspecialidade() throws Exception {
         Long id = cadastrarInstrutor("Bruno Silva", "bruno2@escola.com", "11987654321");
 
-        // O DTO de atualizacao nem aceita esses campos - o request so tem nome/telefone/endereco.
         var request = new AtualizarInstrutorRequest("Bruno Silva Atualizado", "11911112222", ENDERECO);
         mockMvc.perform(put("/api/v1/instrutores/" + id)
                         .header("Authorization", "Bearer " + token)

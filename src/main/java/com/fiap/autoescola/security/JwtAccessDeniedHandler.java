@@ -13,11 +13,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-/** Resposta padronizada quando o usuario autenticado nao tem permissao (403). */
 @Component
 @RequiredArgsConstructor
 public class JwtAccessDeniedHandler implements AccessDeniedHandler {
-
     private final ObjectMapper objectMapper;
 
     @Override

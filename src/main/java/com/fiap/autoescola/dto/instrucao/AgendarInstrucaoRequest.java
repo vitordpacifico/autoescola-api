@@ -5,10 +5,6 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-/**
- * instrutorId é opcional: se omitido, o sistema escolhe aleatoriamente um
- * instrutor disponível na data/hora informada (regra de negócio).
- */
 public record AgendarInstrucaoRequest(
         @NotNull(message = "Aluno é obrigatório") Long alunoId,
         Long instrutorId,

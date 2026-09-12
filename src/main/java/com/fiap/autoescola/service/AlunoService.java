@@ -22,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Slf4j
 public class AlunoService {
-
     private final AlunoRepository alunoRepository;
 
     @Transactional
@@ -51,7 +50,6 @@ public class AlunoService {
         return AlunoDetalheResponse.from(salvo);
     }
 
-    /** Listagem paginada (10/página por padrão), ordenada por nome crescente. */
     @Transactional(readOnly = true)
     public Page<AlunoResponse> listar(Pageable pageable) {
         return alunoRepository.findAllByOrderByNomeAsc(pageable).map(AlunoResponse::from);
@@ -62,7 +60,6 @@ public class AlunoService {
         return AlunoDetalheResponse.from(buscarEntidade(id));
     }
 
-    /** Apenas nome, telefone e endereço são atualizáveis (e-mail/CPF são imutáveis). */
     @Transactional
     public AlunoDetalheResponse atualizar(Long id, AtualizarAlunoRequest request) {
         Aluno aluno = buscarEntidade(id);
@@ -75,7 +72,6 @@ public class AlunoService {
         return AlunoDetalheResponse.from(salvo);
     }
 
-    /** Exclusão lógica: o aluno é marcado como inativo, nunca removido do banco. */
     @Transactional
     public void excluir(Long id) {
         Aluno aluno = buscarEntidade(id);

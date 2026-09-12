@@ -32,7 +32,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class Instrucao {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

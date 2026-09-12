@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import java.time.Instant;
 import java.util.List;
 
-/** Formato padronizado de erro - nunca expoe stack trace ou detalhes internos. */
 public record ApiErrorResponse(
         Instant timestamp,
         int status,

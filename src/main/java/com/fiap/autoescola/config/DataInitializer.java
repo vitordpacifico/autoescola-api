@@ -10,16 +10,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-/**
- * Garante, no primeiro start, a existencia de pelo menos um usuario ADMIN
- * cadastrado - pre-requisito citado no enunciado do CP4 ("uma tabela
- * usuarios... com pelo menos 1 usuario cadastrado").
- */
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class DataInitializer implements CommandLineRunner {
-
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
 

@@ -1,8 +1,6 @@
 package com.fiap.autoescola.util;
 
-/** Validacao do digito verificador do CPF (algoritmo modulo 11), alem do formato. */
 public final class CpfValidator {
-
     private CpfValidator() {
     }
 
@@ -12,7 +10,7 @@ public final class CpfValidator {
         }
         String digits = cpf.replaceAll("\\D", "");
         if (digits.length() != 11 || digits.chars().distinct().count() == 1) {
-            return false; // tamanho invalido ou todos os digitos iguais (000.000.000-00 etc.)
+            return false;
         }
 
         int[] nums = digits.chars().map(c -> c - '0').toArray();
