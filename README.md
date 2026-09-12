@@ -6,10 +6,8 @@ API REST em Spring Boot para agendamento de instruções de uma auto-escola — 
 
 | Nome | RM |
 |---|---|
-| Beatriz Vieira de Novais | RM554746 |
 | Guilherme Abe | RM554743 |
 | Gustavo Ruiz Vieira Paulino | RM554779 |
-| Mariana Neugebauer Dourado | RM550494 |
 | Victor Pacifico Dias | RM558017 |
 
 ## O que esta entrega implementa
