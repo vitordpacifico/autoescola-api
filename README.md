@@ -9,6 +9,8 @@ API REST em Spring Boot para agendamento de instruções de uma auto-escola — 
 | Guilherme Abe | RM554743 |
 | Gustavo Ruiz Vieira Paulino | RM554779 |
 | Victor Pacifico Dias | RM558017 |
+| Beatriz | RM554746 |
+| Mariana | RM550494 |
 
 ## O que o Checkpoint 5 acrescenta
 
