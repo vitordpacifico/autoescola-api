@@ -3,6 +3,7 @@ package com.fiap.autoescola.controller;
 import com.fiap.autoescola.dto.auth.LoginRequest;
 import com.fiap.autoescola.dto.auth.TokenResponse;
 import com.fiap.autoescola.service.AuthService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
+    @Operation(summary = "Autenticar e obter o token JWT")
     public ResponseEntity<TokenResponse> login(@Valid @RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
     }

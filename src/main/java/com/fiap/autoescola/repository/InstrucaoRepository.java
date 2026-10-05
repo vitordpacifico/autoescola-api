@@ -2,6 +2,9 @@ package com.fiap.autoescola.repository;
 
 import com.fiap.autoescola.model.Instrucao;
 import com.fiap.autoescola.model.StatusInstrucao;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,6 +12,9 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 
 public interface InstrucaoRepository extends JpaRepository<Instrucao, Long> {
+    @EntityGraph(attributePaths = {"aluno", "instrutor"})
+    Page<Instrucao> findAllBy(Pageable pageable);
+
     @Query("""
             SELECT COUNT(i) FROM Instrucao i
             WHERE i.aluno.id = :alunoId

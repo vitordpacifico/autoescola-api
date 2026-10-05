@@ -5,6 +5,7 @@ import com.fiap.autoescola.dto.aluno.AlunoResponse;
 import com.fiap.autoescola.dto.aluno.AtualizarAlunoRequest;
 import com.fiap.autoescola.dto.aluno.CriarAlunoRequest;
 import com.fiap.autoescola.service.AlunoService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,11 +35,13 @@ public class AlunoController {
     private final AlunoService alunoService;
 
     @PostMapping
+    @Operation(summary = "Cadastrar aluno")
     public ResponseEntity<AlunoDetalheResponse> cadastrar(@Valid @RequestBody CriarAlunoRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoService.cadastrar(request));
     }
 
     @GetMapping
+    @Operation(summary = "Listar alunos (paginado, ordenado por nome)")
     public ResponseEntity<Page<AlunoResponse>> listar(
             @RequestParam(defaultValue = "0") int pagina,
             @RequestParam(defaultValue = "" + TAMANHO_PAGINA_PADRAO) int tamanho) {
@@ -47,17 +50,20 @@ public class AlunoController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Detalhar aluno")
     public ResponseEntity<AlunoDetalheResponse> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(alunoService.buscarPorId(id));
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Atualizar nome, telefone e endereço do aluno")
     public ResponseEntity<AlunoDetalheResponse> atualizar(@PathVariable Long id,
                                                            @Valid @RequestBody AtualizarAlunoRequest request) {
         return ResponseEntity.ok(alunoService.atualizar(id, request));
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Excluir aluno (exclusão lógica)")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         alunoService.excluir(id);
         return ResponseEntity.noContent().build();

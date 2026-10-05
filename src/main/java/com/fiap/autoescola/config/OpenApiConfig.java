@@ -2,6 +2,7 @@ package com.fiap.autoescola.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
@@ -17,8 +18,10 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("Auto-Escola API")
-                        .description("API REST de agendamento de instruções de uma auto-escola - Checkpoint 4 (SOA e Web Services)")
-                        .version("v1"))
+                        .description("API REST de agendamento de instruções de uma auto-escola - Checkpoint 5 (SOA e Web Services). "
+                                + "Faça login em /api/v1/auth/login e informe o token no botão Authorize.")
+                        .version("v1")
+                        .contact(new Contact().name("Grupo Auto-Escola - FIAP")))
                 .addSecurityItem(new SecurityRequirement().addList(BEARER_SCHEME))
                 .components(new Components().addSecuritySchemes(BEARER_SCHEME,
                         new SecurityScheme()

@@ -14,6 +14,8 @@ import com.fiap.autoescola.repository.InstrucaoRepository;
 import com.fiap.autoescola.repository.InstrutorRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -93,6 +95,11 @@ public class InstrucaoService {
         Instrucao instrucao = instrucaoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Instrução não encontrada: id=" + id));
         return InstrucaoResponse.from(instrucao);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<InstrucaoResponse> listar(Pageable pageable) {
+        return instrucaoRepository.findAllBy(pageable).map(InstrucaoResponse::from);
     }
 
     private void validarHorarioDeFuncionamento(LocalDateTime dataHora) {

@@ -5,6 +5,7 @@ import com.fiap.autoescola.dto.instrutor.CriarInstrutorRequest;
 import com.fiap.autoescola.dto.instrutor.InstrutorDetalheResponse;
 import com.fiap.autoescola.dto.instrutor.InstrutorResponse;
 import com.fiap.autoescola.service.InstrutorService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,11 +35,13 @@ public class InstrutorController {
     private final InstrutorService instrutorService;
 
     @PostMapping
+    @Operation(summary = "Cadastrar instrutor")
     public ResponseEntity<InstrutorDetalheResponse> cadastrar(@Valid @RequestBody CriarInstrutorRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(instrutorService.cadastrar(request));
     }
 
     @GetMapping
+    @Operation(summary = "Listar instrutores (paginado, ordenado por nome)")
     public ResponseEntity<Page<InstrutorResponse>> listar(
             @RequestParam(defaultValue = "0") int pagina,
             @RequestParam(defaultValue = "" + TAMANHO_PAGINA_PADRAO) int tamanho) {
@@ -47,17 +50,20 @@ public class InstrutorController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Detalhar instrutor")
     public ResponseEntity<InstrutorDetalheResponse> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(instrutorService.buscarPorId(id));
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Atualizar nome, telefone e endereço do instrutor")
     public ResponseEntity<InstrutorDetalheResponse> atualizar(@PathVariable Long id,
                                                                @Valid @RequestBody AtualizarInstrutorRequest request) {
         return ResponseEntity.ok(instrutorService.atualizar(id, request));
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Excluir instrutor (exclusão lógica)")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         instrutorService.excluir(id);
         return ResponseEntity.noContent().build();

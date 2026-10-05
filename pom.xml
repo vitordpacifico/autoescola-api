@@ -16,7 +16,7 @@
     <artifactId>autoescola-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>autoescola-api</name>
-    <description>API REST de agendamento de instrucoes de auto-escola - Checkpoint 4 (SOA e Web Services)</description>
+    <description>API REST de agendamento de instrucoes de auto-escola - Checkpoint 5 (SOA e Web Services)</description>
 
     <properties>
         <java.version>21</java.version>

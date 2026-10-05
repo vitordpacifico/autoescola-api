@@ -5,6 +5,7 @@ import com.fiap.autoescola.dto.usuario.AtualizarUsuarioRequest;
 import com.fiap.autoescola.dto.usuario.CriarUsuarioRequest;
 import com.fiap.autoescola.dto.usuario.UsuarioResponse;
 import com.fiap.autoescola.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,11 +34,13 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping
+    @Operation(summary = "Cadastrar usuário (apenas ADMIN)")
     public ResponseEntity<UsuarioResponse> cadastrar(@Valid @RequestBody CriarUsuarioRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.cadastrar(request));
     }
 
     @GetMapping
+    @Operation(summary = "Listar usuários (apenas ADMIN)")
     public ResponseEntity<Page<UsuarioResponse>> listar(
             @RequestParam(defaultValue = "0") int pagina,
             @RequestParam(defaultValue = "10") int tamanho) {
@@ -46,18 +49,21 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Atualizar perfil e status de um usuário (apenas ADMIN)")
     public ResponseEntity<UsuarioResponse> atualizarPerfil(@PathVariable Long id,
                                                             @Valid @RequestBody AtualizarUsuarioRequest request) {
         return ResponseEntity.ok(usuarioService.atualizarPerfil(id, request));
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Excluir usuário (apenas ADMIN)")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         usuarioService.excluir(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/me/senha")
+    @Operation(summary = "Trocar a própria senha")
     public ResponseEntity<Void> alterarPropriaSenha(Authentication authentication,
                                                      @Valid @RequestBody AlterarSenhaRequest request) {
         usuarioService.alterarPropriaSenha(authentication.getName(), request);

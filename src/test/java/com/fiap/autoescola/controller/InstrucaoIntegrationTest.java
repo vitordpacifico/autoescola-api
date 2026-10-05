@@ -29,6 +29,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -179,6 +180,26 @@ class InstrucaoIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(cancelarRequest)))
                 .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    void listar_retornaInstrucoesPaginadasOrdenadasPorDataHora() throws Exception {
+        LocalDateTime dataHora = proximoHorarioValido(3);
+        agendar(alunoId, instrutorId, dataHora.plusHours(2));
+        agendar(alunoId, instrutorId, dataHora);
+
+        mockMvc.perform(get("/api/v1/instrucoes").header("Authorization", "Bearer " + token))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content.length()").value(2))
+                .andExpect(jsonPath("$.content[0].dataHora").value(dataHora.toString() + ":00"))
+                .andExpect(jsonPath("$.content[0].alunoNome").value("Aluno Instrução"))
+                .andExpect(jsonPath("$.content[0].instrutorNome").value("Instrutor Instrução"));
+    }
+
+    @Test
+    void buscarPorId_instrucaoInexistente_retorna404() throws Exception {
+        mockMvc.perform(get("/api/v1/instrucoes/999999").header("Authorization", "Bearer " + token))
+                .andExpect(status().isNotFound());
     }
 
     private Long agendar(Long alunoId, Long instrutorId, LocalDateTime dataHora) throws Exception {
